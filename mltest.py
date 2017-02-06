@@ -15,6 +15,8 @@ y = W * x_data + b
 # Minimize the mean squared errors.
 loss = tf.reduce_mean(tf.square(y - y_data))
 optimizer = tf.train.GradientDescentOptimizer(0.5)
+#optimizer = tf.train.AdamOptimizer(0.5)
+
 train = optimizer.minimize(loss)
 
 # Before starting, initialize the variables.  We will 'run' this first.
@@ -23,10 +25,13 @@ init = tf.global_variables_initializer()
 # Launch the graph.
 sess = tf.Session()
 sess.run(init)
+#hist = tf.histogram_summary("testWeight", W)
 
 # Fit the line.
 for step in range(201):
     sess.run(train)
+    #merge = tf.merge_all_summaries()
+    #writer = tf.train.SummaryWriter("./log/xor_logs", sess.graph_def)
     if step % 20 == 0:
         print(step, sess.run(W), sess.run(b))
 

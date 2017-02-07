@@ -132,6 +132,7 @@ def train():
       k = 1.0
     return {x: xs, y_: ys, keep_prob: k}
 
+
   for i in range(FLAGS.max_steps):
     if i % 10 == 0:  # Record summaries and test-set accuracy
       summary, acc = sess.run([merged, accuracy], feed_dict=feed_dict(False))

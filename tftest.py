@@ -26,9 +26,9 @@ init = tf.global_variables_initializer()
 with tf.Session() as sess:
     sess.run(init)
     for step in range(2001):
-        sess.run(train, feed_dict={X:x_data, Y:y_data})
+        sess.run(train, feed_dict={X: x_data, Y: y_data})
         if step % 20 == 0:
-            print(step, sess.run(cost, feed_dict={X:x_data, Y:y_data}),sess.run(W) )
+            print(step, sess.run(cost, feed_dict={X: x_data, Y: y_data}),sess.run(W) )
 
     pltx1 = np.arange(-10, 10, 0.1)
     pltx2 = np.arange(-10, 10, 0.1)

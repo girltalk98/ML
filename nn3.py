@@ -33,9 +33,9 @@ with tf.Session() as sess:
     sess.run(init)
     summary_writer = tf.summary.FileWriter("./tb", sess.graph)
 
-    for step in range(50001):
+    for step in range(10001):
         sess.run(optimizer, feed_dict={X: x_data, Y: y_data})
-        if step % 2000 == 0:
+        if step % 20 == 0:
             summary_str = sess.run(summary, feed_dict={X: x_data, Y: y_data})
             summary_writer.add_summary(summary_str, step)
             summary_writer.flush()

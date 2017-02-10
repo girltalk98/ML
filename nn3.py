@@ -6,14 +6,20 @@ y_data = [[0.], [1.], [1.], [0.]]
 X = tf.placeholder(tf.float32, [None, 2])
 Y = tf.placeholder(tf.float32)
 
-W1 = tf.Variable(tf.random_uniform([2, 2], -1.0, 1.0), name="Weight1")
-W2 = tf.Variable(tf.random_uniform([2, 1], -1.0, 1.0), name="Weight2")
+W1 = tf.Variable(tf.random_uniform([2, 5], -1.0, 1.0), name="Weight1")
+W2 = tf.Variable(tf.random_uniform([5, 10], -1.0, 1.0), name="Weight2")
+W3 = tf.Variable(tf.random_uniform([10, 2], -1.0, 1.0), name="Weight3")
+W4 = tf.Variable(tf.random_uniform([2, 1], -1.0, 1.0), name="Weight7")
 
-b1 = tf.Variable(tf.zeros([1, 2]), name="Bias1")
-b2 = tf.Variable(tf.zeros([1]), name="Bias2")
+b1 = tf.Variable(tf.zeros([1, 5]), name="Bias1")
+b2 = tf.Variable(tf.zeros([1, 10]), name="Bias2")
+b3 = tf.Variable(tf.zeros([1, 2]), name="Bias3")
+b4 = tf.Variable(tf.zeros([1]), name="Bias7")
 
 h1 = tf.sigmoid(tf.matmul(X, W1) + b1)
-hypothesis = tf.sigmoid(tf.matmul(h1, W2) + b2)
+h2 = tf.sigmoid(tf.matmul(h1, W2) + b2)
+h3 = tf.sigmoid(tf.matmul(h2, W3) + b3)
+hypothesis = tf.sigmoid(tf.matmul(h3, W4) + b4)
 
 cost = tf.reduce_mean(-tf.reduce_sum(Y*tf.log(hypothesis) + (1-Y)*tf.log(1-hypothesis)))
 
@@ -27,9 +33,9 @@ with tf.Session() as sess:
     sess.run(init)
     summary_writer = tf.summary.FileWriter("./tb", sess.graph)
 
-    for step in range(10001):
+    for step in range(50001):
         sess.run(optimizer, feed_dict={X: x_data, Y: y_data})
-        if step % 20 == 0:
+        if step % 2000 == 0:
             summary_str = sess.run(summary, feed_dict={X: x_data, Y: y_data})
             summary_writer.add_summary(summary_str, step)
             summary_writer.flush()

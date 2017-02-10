@@ -6,10 +6,10 @@ y_data = [[0.], [1.], [1.], [0.]]
 X = tf.placeholder(tf.float32, [None, 2])
 Y = tf.placeholder(tf.float32)
 
-W1 = tf.Variable(tf.random_uniform([2, 2], -1.0, 1.0), name="Weight1")
-W2 = tf.Variable(tf.random_uniform([2, 1], -1.0, 1.0), name="Weight2")
+W1 = tf.Variable(tf.random_uniform([2, 10], -1.0, 1.0), name="Weight1")
+W2 = tf.Variable(tf.random_uniform([10, 1], -1.0, 1.0), name="Weight2")
 
-b1 = tf.Variable(tf.zeros([1, 2]), name="Bias1")
+b1 = tf.Variable(tf.zeros([1, 10]), name="Bias1")
 b2 = tf.Variable(tf.zeros([1]), name="Bias2")
 
 h1 = tf.sigmoid(tf.matmul(X, W1) + b1)
